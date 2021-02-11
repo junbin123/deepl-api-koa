@@ -8,8 +8,8 @@ const request = async ({ source = '', transType = 'en2zh' }) => {
   const targetLang = transType.split('2')[1] || 'zh'
   const url = `https://www.deepl.com/translator#${sourceLang}/${targetLang}/${encodeURIComponent(source.replace(/\r?\n|\r/g, ''))}`
   const browser = await puppeteer.launch({
-    headless: false,
-    defaultViewport: null
+    // headless: false,
+    // defaultViewport: null
   })
   const page = await browser.newPage()
   console.log('新建标签页')
