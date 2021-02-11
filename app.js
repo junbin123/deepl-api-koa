@@ -7,6 +7,7 @@ const deepl = require('./deepl.js')
 // const { getPage } = require('./page.js')
 let browser = null
 app.use(async (ctx, next) => {
+  ctx.set('Access-Control-Allow-Origin', '*');
   console.log('first1')
   if (!browser) {
     browser = await puppeteer.launch({
