@@ -1,5 +1,5 @@
-const puppeteer = require('puppeteer')
-const request = async ({ source = '', transType = 'en2zh' }) => {
+const { getPage } = require('./page.js')
+const request = async ({ source = '', transType = 'en2zh', browser }) => {
   const result = { target: '', msg: 'success', code: 0 }
   if (!source) {
     return result
@@ -7,11 +7,7 @@ const request = async ({ source = '', transType = 'en2zh' }) => {
   const sourceLang = transType.split('2')[0] || 'en'
   const targetLang = transType.split('2')[1] || 'zh'
   const url = `https://www.deepl.com/translator#${sourceLang}/${targetLang}/${encodeURIComponent(source.replace(/\r?\n|\r/g, ''))}`
-  const browser = await puppeteer.launch({
-    // headless: false,
-    // defaultViewport: null
-  })
-  const page = await browser.newPage()
+  const page = await getPage(browser)
   console.log('新建标签页')
   await page.goto(url)
   // 监听翻译结果
