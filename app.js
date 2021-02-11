@@ -4,10 +4,11 @@ const puppeteer = require('puppeteer')
 const app = new Koa()
 const router = new Router()
 const deepl = require('./deepl.js')
+const cors = require('@koa/cors')
 // const { getPage } = require('./page.js')
 let browser = null
 app.use(async (ctx, next) => {
-  ctx.set('Access-Control-Allow-Origin', '*');
+  ctx.set('Access-Control-Allow-Origin', '*')
   console.log('first1')
   if (!browser) {
     browser = await puppeteer.launch({
@@ -33,5 +34,5 @@ router.get('/deepl/trans', async ctx => {
   return (ctx.status = 200)
 })
 
-app.use(router.routes()).use(router.allowedMethods())
+app.use(router.routes()).use(router.allowedMethods()).use(cors())
 app.listen(3000)
