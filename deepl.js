@@ -6,7 +6,9 @@ const request = async ({ source = '', transType = 'en2zh', browser }) => {
   }
   const sourceLang = transType.split('2')[0] || 'en'
   const targetLang = transType.split('2')[1] || 'zh'
-  const url = `https://www.deepl.com/translator#${sourceLang}/${targetLang}/${encodeURIComponent(source.replace(/\r?\n|\r/g, ''))}`
+  console.log({ source })
+  const url = `https://www.deepl.com/translator#${sourceLang}/${targetLang}/${encodeURIComponent(source)}`
+  console.log('url:', url)
   const page = await getPage(browser)
   console.log('新建标签页')
   await page.goto(url)
