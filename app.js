@@ -13,7 +13,8 @@ app.use(async (ctx, next) => {
   if (!browser) {
     browser = await puppeteer.launch({
       headless: true,
-      defaultViewport: null
+      defaultViewport: null,
+      args: ['--no-sandbox', '--disable-setuid-sandbox']
     })
   }
   await next()
