@@ -24,6 +24,7 @@ const request = async ({ source = '', transType = 'en2zh', browser }) => {
         clearInterval(timer)
       }
       if (index === 400) {
+        resolve({ target })
         // 超过20s
         reject({ msg: '请求超时' })
       }

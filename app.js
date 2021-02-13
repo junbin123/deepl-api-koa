@@ -7,6 +7,16 @@ const deepl = require('./deepl.js')
 const cors = require('@koa/cors')
 // const { getPage } = require('./page.js')
 let browser = null
+puppeteer
+  .launch({
+    headless: false,
+    defaultViewport: null,
+    args: ['--no-sandbox', '--disable-setuid-sandbox']
+  })
+  .then(res => {
+    console.log('hhh')
+  })
+
 app.use(async (ctx, next) => {
   ctx.set('Access-Control-Allow-Origin', '*')
   console.log('first1')
