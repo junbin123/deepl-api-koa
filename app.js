@@ -9,9 +9,9 @@ const cors = require('@koa/cors')
 let browser = null
 puppeteer
   .launch({
-    headless: false,
-    defaultViewport: null,
-    args: ['--no-sandbox', '--disable-setuid-sandbox']
+    // headless: false,
+    // defaultViewport: null,
+    args: ['--no-sandbox']
   })
   .then(res => {
     console.log('hhh')
