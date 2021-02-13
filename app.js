@@ -35,4 +35,7 @@ router.get('/deepl/trans', async ctx => {
 })
 
 app.use(router.routes()).use(router.allowedMethods()).use(cors())
-app.listen(3000)
+
+app.listen(3000, () => {
+  console.log('服务已启动, 请访问http://localhost:3000')
+})
