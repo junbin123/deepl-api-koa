@@ -12,8 +12,8 @@ app.use(async (ctx, next) => {
   console.log('first1')
   if (!browser) {
     browser = await puppeteer.launch({
-      // headless: false,
-      // defaultViewport: null
+      headless: true,
+      defaultViewport: null
     })
   }
   await next()
