@@ -10,7 +10,7 @@ let browser = null
 
 app.use(async (ctx, next) => {
   ctx.set('Access-Control-Allow-Origin', '*')
-  console.log('first1')
+  console.time('请求总时长')
   if (!browser) {
     browser = await puppeteer.launch({
       headless: true,
@@ -24,8 +24,13 @@ app.use(async (ctx, next) => {
 // http://localhost:3000/deepl/trans?source=hello%20world&transType=en2zh
 router.get('/deepl/trans', async ctx => {
   const { query = '' } = ctx.req._parsedUrl
-  const source = decodeURIComponent(query.split('&transType=')[0].slice(7))
-  const transType = query.split('&transType=')[1]
+  console.log('1----', { query })
+  const queryObj = {}
+  query.split('&').forEach(item => {
+    const [key, value] = item.split('=')
+    queryObj[key] = decodeURIComponent(value)
+  })
+  const { source, transType } = queryObj
   const params = {
     source,
     transType,
@@ -33,6 +38,7 @@ router.get('/deepl/trans', async ctx => {
   }
   const result = await deepl.request(params)
   ctx.body = result
+  console.timeEnd('请求总时长')
   return (ctx.status = 200)
 })
 
